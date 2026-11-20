@@ -6,6 +6,7 @@
     <title>Регистрация</title>
 </head>
 <body>
+    @include('layouts/header-guest')
     <div class="wrapper">
         <form action="{{route('register.post')}}" class="form-reg" method="POST">
             @csrf
@@ -31,6 +32,7 @@
                 @error('phone') <div class="error">{{$message}}</div>@enderror
             </div>
             <button type="submit">Зарегистрироваться</button>
+            <p>Уже зарегистрированы?<a href="{{route('login')}}">Войти</a></p>
         </form>
     </div>
 </body>

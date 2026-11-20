@@ -10,7 +10,7 @@ class AuthController extends Controller
 {
     public function register(Request $request){
     $data = $request->validate([
-    'login'=>'required|min:6|regex:/^[A-za-z0-9]+$/|unique:users,login',
+    'login'=>'required|min:6|regex:/^[A-Za-z0-9]+$/|unique:users,login',
     'password'=>'required|min:8',
     'phone'=>'required',
     'email'=>'required|email'
@@ -45,11 +45,18 @@ class AuthController extends Controller
     $request->session()->regenerate();
     
     if(Auth::User()->role=='admin'){
-        return redirect ('/Admin');
+        return redirect ('/Panel');
     }
     return redirect('/Booking');
     }
      return back()
     ->withErrors(['login'=>'Неверный логин или пароль']);
+    }
+
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login');
     }
 }

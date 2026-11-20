@@ -16,11 +16,10 @@ return new class extends Migration
             $table->id();
             $table->foreignid('zone_id')->constrained('zones');
             $table->foreignid('user_id')->constrained('users');
-            $table->foreignid('service_id')->constrained('services');
-            $table->foreignid('status_id')->default(1)->constrained('statuses');
+            $table->foreignid('payment_method_id')->constrained('payment_methods');
             $table->date('date_start');
             $table->time('time_start');
-            $table->string('payment');
+            $table->enum('status', ['Новая','Подтверждена','Отклонена','Завершена',]);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
